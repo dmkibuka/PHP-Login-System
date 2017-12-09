@@ -55,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $headers .="Content-Type: text/html;charset=UTF-8" ."\r\n";
 
             //Additional headers
-            $headers .="From " .$first_name.'" "' .$last_name ."<" .$email. ">"."\r\n";
+            $headers .="From: noreply@yourdomain.com\r\n"; // Change this email address
 
             //Send email
             mail($to, $subject, $message, $headers);
