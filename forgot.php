@@ -55,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $headers .="Content-Type: text/html;charset=UTF-8" ."\r\n";
 
             //Additional headers
-            $headers .="From: noreply@yourdomain.com\r\n"; // Change this email address
+            $headers .="From " .$first_name.'" "' .$last_name ."<" .$email. ">"."\r\n";
 
             //Send email
             mail($to, $subject, $message, $headers);
@@ -86,14 +86,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     </head>
 
     <body>
-        <div class="login-form">
+        <div class="forgot">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 forgot">
+                    <div class="col-lg-12">
                         <h1>Reset Password</h1>
                         <p>Please enter email address associated with this account</p>
                         <!--Reset password Form -->
-                        <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" autocomplete="off">
+                        <form id="forgot" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" autocomplete="off">
                             <div class="form-group input-group">
                                 <span class="input-group-addon" id="sizing-addon3">Email Address</span>
                                 <input type="email" class="form-control" name="email" id="email" aria-describedby="sizing-addon3">
@@ -101,7 +101,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <button type="submit" name="pwdReset" id="pwdReset" class="btn btn-outline-secondary">Request Reset</button>
                         </form>
                     </div>
-                    <div class="results col-lg-12 <?php echo $msgClass; ?> p-3 mt-2">
+                    <div id="results" class="col-lg-12 <?php echo $msgClass; ?> p-3 mt-2">
                         <?php echo $msg; ?>
                     </div>
                 </div>
@@ -122,6 +122,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="login.js"></script>
     </body>
 
     </html>
