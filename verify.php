@@ -1,16 +1,16 @@
 <?php
 /* Verify user email from confirmation email link sent to users email */
 require 'database.php';
-// Validate email and harsh results
-if(isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['harsh']) && !empty($_GET['harsh'])){
+// Validate email and hash results
+if(isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !empty($_GET['hash'])){
     // Initiate database
     $db = new Database;
     //Process values
     $email = $db->escape_value(trim($_GET['email']));
-    $harsh = $db->escape_value(trim($_GET['harsh']));
+    $hash = $db->escape_value(trim($_GET['hash']));
     /**
     *Query matching email from database
-    *Query identical harsh from database
+    *Query identical hash from database
     *Result must have active status = 0
     **/
 

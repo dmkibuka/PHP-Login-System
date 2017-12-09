@@ -9,7 +9,7 @@ $msgClass = '';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //Validate posted fields
-    if(empty($_POST['email']) || (!filter_var($email, FILTER_VALIDATE_EMAIL))){
+ if(empty($_POST['email']) || (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))){
         $msg = 'Please enter valid email address';
         $msgClass = 'alert-danger';
     } else {
@@ -38,12 +38,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             **/
             $user = $db->fetch_assoc($result_set);
             $email = $user['email'];
-            $harsh = $user['harsh'];
+            $hash = $user['hash'];
             $first_name = $user['first_name'];
+            $last_name = $user['last_name'];
             // Send registration confirmation link (pwdReset.php)
             $to      = $user['email'];
             $subject = 'Password Reset Link ( clevertechie.com )';
-            $message_body = '
+            $message = '
             Hello '.$first_name.',
             You have requested password reset!
             Please click this link to reset your password:

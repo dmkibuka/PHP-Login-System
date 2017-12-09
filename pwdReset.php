@@ -9,16 +9,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Fetch and sanitize password
         $new_password = password_hash($_POST['newpassword'], PASSWORD_BCRYPT);
 
-        // Validate email and harsh results
-        if(isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['harsh']) && !empty($_GET['harsh'])){
+        // Validate email and hash results
+        if(isset($_GET['email']) && !empty($_GET['email']) && isset($_GET['hash']) && !empty($_GET['hash'])){
             // Initiate database
             $db = new Database;
             //Process values
             $email = $db->escape_value(trim($_GET['email']));
-            $harsh = $db->escape_value(trim($_GET['harsh']));
+            $hash = $db->escape_value(trim($_GET['hash']));
             /**
             *Query matching email from database
-            *Query identical harsh from database
+            *Query identical hash from database
             *Result must have active status = 0
             **/
 
@@ -81,9 +81,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <h1>Reset Your Password</h1>
                         <!--Reset password Form -->
                         <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" autocomplete="off">
-                            <!--Extract email and harsh from forgot email link -->
+                            <!--Extract email and hash from forgot email link -->
                             <input type="hidden" name="email" value="<?=$email?>">
-                            <input type="hidden" name="harsh" value="<?=$harsh?>">
+                            <input type="hidden" name="hash" value="<?=$hash?>">
                             <!--Set new password -->
                             <div class="form-group input-group">
                                 <span class="input-group-addon" id="sizing-addon1">New Password</span>

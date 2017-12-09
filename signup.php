@@ -12,7 +12,7 @@ if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['e
     $last_name = $db->escape_value(trim(ucfirst($_POST['lastname'])));
     $email = $db->escape_value(trim($_POST['email']));
     $password = $db->escape_value(password_hash($_POST['password'], PASSWORD_BCRYPT));
-    $harsh = $db->escape_value(md5(rand(0,1000)));
+    $hash = $db->escape_value(md5(rand(0,1000)));
 
     //Validate email
     if(filter_var($email, FILTER_VALIDATE_EMAIL) === False){
@@ -29,8 +29,8 @@ if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['e
             $msg = 'This user already exists.<br />Please <a href="#login"><strong>Log In.</strong></a>';
         } else {
             //Add user to database
-            $sql = "INSERT INTO users (first_name, last_name, email, password, harsh)";
-            $sql .= "VALUES ('$first_name', '$last_name', '$email', '$password', '$harsh')";
+            $sql = "INSERT INTO users (first_name, last_name, email, password, hash)";
+            $sql .= "VALUES ('$first_name', '$last_name', '$email', '$password', '$hash')";
 
             if(!$db->query($sql)){
                 //Registration failed
@@ -41,7 +41,7 @@ if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['e
                 // Build registration confirmation email to user
                 $to = $email;
                 $subject = 'Account Registration Verification ('.$_SERVER["HTTP_HOST"].')';
-                $message_body = '
+                $message = '
                 Hello '.$first_name.',
                 Thank you for registering, Welcome!!
                 Please click the link below to activate your account before link expires:

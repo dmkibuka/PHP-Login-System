@@ -36,7 +36,7 @@ CREATE TABLE `users` (
   `last_name` varchar(32) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `harsh` varchar(32) NOT NULL,
+  `hash` varchar(32) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
