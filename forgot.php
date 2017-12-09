@@ -39,21 +39,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $user = $db->fetch_assoc($result_set);
             $email = $user['email'];
             $harsh = $user['harsh'];
-            $firstname = $user['first_name'];
+            $first_name = $user['first_name'];
             // Send registration confirmation link (pwdReset.php)
             $to      = $user['email'];
             $subject = 'Password Reset Link ( clevertechie.com )';
             $message_body = '
-            Hello '.$firstname.',
-
+            Hello '.$first_name.',
             You have requested password reset!
-
             Please click this link to reset your password:
-
             http://localhost/php-login-system/pwdReset.php?email='.$email.'&hash='.$hash;
 
-            // Send reset email
-            mail($to, $subject, $message_body);
+            //Email headers
+            $headers = "MIME-Version: 1.0" ."\r\n";
+            $headers .="Content-Type: text/html;charset=UTF-8" ."\r\n";
+
+            //Additional headers
+            $headers .="From " .$first_name.'" "' .$last_name ."<" .$email. ">"."\r\n";
+
+            //Send email
+            mail($to, $subject, $message, $headers);
 
             // Email address not in database
             $msgClass = 'alert-success';

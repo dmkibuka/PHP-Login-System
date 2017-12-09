@@ -42,13 +42,21 @@ if(!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['e
                 $to = $email;
                 $subject = 'Account Registration Verification ('.$_SERVER["HTTP_HOST"].')';
                 $message_body = '
-                Hello '.$firstname.',
+                Hello '.$first_name.',
                 Thank you for registering, Welcome!!
                 Please click the link below to activate your account before link expires:
                 http://localhost/php-login-system/verify.php?email='.$email.'&hash='.$hash;
 
+
+                //Email headers
+                $headers = "MIME-Version: 1.0" ."\r\n";
+                $headers .="Content-Type: text/html;charset=UTF-8" ."\r\n";
+
+                //Additional headers
+                $headers .="From " .$first_name.'" "' .$last_name ."<" .$email. ">"."\r\n";
+
                 //Send email
-                mail($to, $subject, $message);
+                mail($to, $subject, $message, $headers);
 
                 //Success message to User
                 $msgClass = 'alert-success';
